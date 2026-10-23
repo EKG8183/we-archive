@@ -1,2 +1,0 @@
-# we-archive
-personal archive

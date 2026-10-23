@@ -1,8 +1,7 @@
-var cacheName = 'wonderful-everyday-v2';
+var cacheName = 'wonderful-everyday-v3';
 
 /* Start the service worker and cache all of the app's content or use the existing one */
 
-/* 视频提前缓存到浏览器（体积已压缩到 9.4MB） */
 var PRECACHE = [
     './game/movie/kiss.webm',
     './game/movie/main_menu.webm',
@@ -14,9 +13,7 @@ self.addEventListener('install', function (e) {
     console.log('Service worker installed.');
     e.waitUntil(
         caches.open(cacheName).then(function (c) {
-            return c.addAll(PRECACHE).then(function () {
-                console.log('Videos precached.');
-            }).catch(function (err) {
+            return c.addAll(PRECACHE).catch(function (err) {
                 console.log('Precache failed: ' + err);
             });
         })

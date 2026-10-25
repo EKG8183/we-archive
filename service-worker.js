@@ -1,24 +1,12 @@
-
-/* 视频预缓存（9.4MB） */
-var PRECACHE = [
-    './game/movie/kiss.webm',
-    './game/movie/main_menu.webm',
-    './game/movie/op.webm',
-    './game/movie/test.webm'
-];
-
-var cacheName = '遙かなる夢に-v11';
+var PRECACHE = ['./game/movie/kiss.webm','./game/movie/main_menu.webm','./game/movie/op.webm','./game/movie/test.webm'];
+var cacheName = '遙かなる夢に-v12';
 
 /* Start the service worker and cache all of the app's content or use the existing one */
 self.addEventListener('install', function (e) {
     console.log('Service worker installed.');
-    e.waitUntil(
-        caches.open(cacheName).then(function (c) {
-            return c.addAll(PRECACHE).catch(function (err) {
-                console.log('Precache failed: ' + err);
-            });
-        })
-    );
+    e.waitUntil(caches.open(cacheName).then(function (c) {
+        return c.addAll(PRECACHE).catch(function (err) { console.log('Precache failed: ' + err); });
+    }));
     self.skipWaiting();
 });
 

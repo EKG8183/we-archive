@@ -1,5 +1,5 @@
 var PRECACHE = ['./game/movie/kiss.webm','./game/movie/main_menu.webm','./game/movie/op.webm','./game/movie/test.webm'];
-var cacheName = '遙かなる夢に-v12';
+var cacheName = '遙かなる夢に-2026-11-07-b';
 
 /* Start the service worker and cache all of the app's content or use the existing one */
 self.addEventListener('install', function (e) {

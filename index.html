@@ -228,6 +228,53 @@
   </script>
   <script src="renpy-pre.js"></script>
   <script async type="text/javascript" src="renpy.js"></script>
+<!-- 游玩人数统计（不蒜子 busuanzi，无需注册） -->
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div id="play-counter">
+  <span>游玩 <b id="busuanzi_value_site_pv">--</b> 次</span>
+  <span class="sep">·</span>
+  <span>玩家 <b id="busuanzi_value_site_uv">--</b> 人</span>
+</div>
+<style>
+#play-counter {
+  position: fixed;
+  right: 10px;
+  bottom: 6px;
+  z-index: 9999;
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: rgba(6, 10, 20, 0.55);
+  border: 1px solid rgba(120, 200, 255, 0.18);
+  color: #9fb3d1;
+  font: 12px/1.5 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0.5px;
+  opacity: 0.72;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.3s;
+}
+#play-counter b { color: #6aff5a; font-weight: 600; }
+#play-counter .sep { margin: 0 4px; color: #4a5a70; }
+#play-counter.loaded { opacity: 0.55; }
+#play-counter.failed { display: none; }
+</style>
+<script>
+(function () {
+  var box = document.getElementById('play-counter');
+  var tries = 0;
+  var timer = setInterval(function () {
+    var pv = document.getElementById('busuanzi_value_site_pv');
+    var uv = document.getElementById('busuanzi_value_site_uv');
+    if (pv && pv.textContent && pv.textContent !== '--') {
+      box.classList.add('loaded');
+      clearInterval(timer);
+    } else if (++tries > 20) {          // 约 10 秒仍无数据 -> 隐藏，避免一直显示 --
+      box.classList.add('failed');
+      clearInterval(timer);
+    }
+  }, 500);
+})();
+</script>
 </body>
 
 </html>
